@@ -1,0 +1,9 @@
+{
+  "name": "electron-timer",
+  "version": "1.0.0",
+  "description": "Timer app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  }
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div id="container-dashboard">
+        <div class="dashboard-header">
+            <h1>Timer Dashboard</h1>
+        </div>
+        
+        <div class="dashboard-timer-row">
+            <div id="timer-input">
+
+                <label>Set Time:</label>
+                <input type="number" id="minutes" value="25" min="0" />
+                
+                <!-- <div id="button-container"> -->
+                    <button id="select">Select</button>
+                    <button id="start">Start</button>
+                    <button id="stop">Stop</button>
+                    <button id="reset">Reset</button>
+                <!-- </div> -->
+            </div>
+        </div> 
+
+    </div> <!-- End div.container  -->
+
+  <script>
+    const minutesInput = document.getElementById('minutes');
+
+    document.getElementById('start').onclick = () => {
+      window.electronAPI.sendTimerAction('start', minutesInput.value);
+    };
+
+    document.getElementById('stop').onclick = () => {
+      window.electronAPI.sendTimerAction('stop');
+    };
+
+    document.getElementById('reset').onclick = () => {
+      window.electronAPI.sendTimerAction('reset');
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Timer</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+
+    
+    <div id="display">00:00</div>
+    
+    <script>
+      let remaining = 0;
+      let interval;
+      
+      function updateDisplay() {
+        const mins = Math.floor(remaining / 60).toString().padStart(2, '0');
+        const secs = (remaining % 60).toString().padStart(2, '0');
+        document.getElementById('display').innerText = `${mins}:${secs}`;
+      }
+      
+      window.electronAPI.onTimerAction(({ action, value }) => {
+        if (action === 'start') {
+          remaining = parseInt(value) * 60;
+          clearInterval(interval);
+          updateDisplay();
+          interval = setInterval(() => {
+            remaining--;
+            updateDisplay();
+            if (remaining <= 0) clearInterval(interval);
+          }, 1000);
+        }
+        if (action === 'stop') clearInterval(interval);
+        if (action === 'reset') {
+          clearInterval(interval);
+          remaining = 0;
+          updateDisplay();
+        }
+      });
+      </script>
+      </div><!-- End container -->
+</body>
+</html>
