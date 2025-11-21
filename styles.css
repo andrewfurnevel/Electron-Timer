@@ -50,19 +50,58 @@ body {
     margin-top: 20px;
     padding: 20px;
     background-color: #222;
-    border-radius: 1rem;
+    border-radius: 10px;
 }
 
 input[type="number"] {
-    width: 70px;
+    height: 30px;
+    width: 40px;
     font-size: 1.2rem;
     color: #fff;
     background-color: #000;
     padding: 5px;
     margin-top: 10px;
-    height: 30px;
     border-radius: 5px;
 }
+
+/* Always show number input arrows (Chrome, Edge, Opera) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+  display: block;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield; /* reset first */
+}
+
+input[type="number"]::-moz-inner-spin-button,
+input[type="number"]::-moz-outer-spin-button {
+  opacity: 1;
+  display: block;
+}
+
+input[type="number"] {
+  font-size: 1.4rem;
+  width: 50px;
+  padding: 6px;
+}
+
+/* input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} */
+ 
+/* Add left padding to number input arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  margin-left: 5px;     /* adds space on the left side of the arrows */
+}
+
+
+
 
 button {
     font-size: 1.1rem;

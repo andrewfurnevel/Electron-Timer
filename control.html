@@ -14,8 +14,10 @@
         <div class="dashboard-timer-row">
             <div id="timer-input">
 
-                <label>Set Time:</label>
-                <input type="number" id="minutes" value="25" min="0" />
+                <label>Duration: H:M:S</label>
+                <input type="number" id="hours" value="00" min="00" max="25"/>
+                <input type="number" id="minutes" value="00" min="00" />
+                <input type="number" id="seconds" value="00" min="00" max="59" />
                 
                 <!-- <div id="button-container"> -->
                     <button id="select">Select</button>
@@ -28,20 +30,29 @@
 
     </div> <!-- End div.container  -->
 
-  <script>
-    const minutesInput = document.getElementById('minutes');
+<script>
+  const hoursInput = document.getElementById('hours');
+  const minutesInput = document.getElementById('minutes');
+  const secondsInput = document.getElementById('seconds');
 
-    document.getElementById('start').onclick = () => {
-      window.electronAPI.sendTimerAction('start', minutesInput.value);
-    };
+  document.getElementById('start').onclick = () => {
+    const hrs = parseInt(hoursInput.value) || 0;
+    const mins = parseInt(minutesInput.value) || 0;
+    const secs = parseInt(secondsInput.value) || 0;
 
-    document.getElementById('stop').onclick = () => {
-      window.electronAPI.sendTimerAction('stop');
-    };
+    const totalSeconds = (hrs * 3600) + (mins * 60) + secs;
+    window.electronAPI.sendTimerAction('start', totalSeconds);
+  };
 
-    document.getElementById('reset').onclick = () => {
-      window.electronAPI.sendTimerAction('reset');
-    };
-  </script>
+  document.getElementById('stop').onclick = () => {
+    window.electronAPI.sendTimerAction('stop');
+  };
+
+  document.getElementById('reset').onclick = () => {
+    window.electronAPI.sendTimerAction('reset');
+  };
+</script>
+
+
 </body>
 </html>

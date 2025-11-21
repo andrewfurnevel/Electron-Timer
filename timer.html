@@ -15,30 +15,49 @@
       let remaining = 0;
       let interval;
       
-      function updateDisplay() {
-        const mins = Math.floor(remaining / 60).toString().padStart(2, '0');
-        const secs = (remaining % 60).toString().padStart(2, '0');
-        document.getElementById('display').innerText = `${mins}:${secs}`;
-      }
+function updateDisplay() {
+  const hrs = Math.floor(remaining / 3600);
+  const mins = Math.floor((remaining % 3600) / 60);
+  const secs = remaining % 60;
+
+  const mm = mins.toString().padStart(2, '0');
+  const ss = secs.toString().padStart(2, '0');
+
+  if (hrs > 0) {
+    // Show H:MM:SS (hours without leading zeros)
+    document.getElementById('display').innerText =
+      `${hrs}:${mm}:${ss}`;
+  } else {
+    // Show MM:SS (hide hours)
+    document.getElementById('display').innerText =
+      `${mm}:${ss}`;
+  }
+}
+
+
       
-      window.electronAPI.onTimerAction(({ action, value }) => {
-        if (action === 'start') {
-          remaining = parseInt(value) * 60;
-          clearInterval(interval);
-          updateDisplay();
-          interval = setInterval(() => {
-            remaining--;
-            updateDisplay();
-            if (remaining <= 0) clearInterval(interval);
-          }, 1000);
-        }
-        if (action === 'stop') clearInterval(interval);
-        if (action === 'reset') {
-          clearInterval(interval);
-          remaining = 0;
-          updateDisplay();
-        }
-      });
+window.electronAPI.onTimerAction(({ action, value }) => {
+  if (action === 'start') {
+    remaining = parseInt(value); // already total seconds
+    clearInterval(interval);
+    updateDisplay();
+    interval = setInterval(() => {
+      remaining--;
+
+      updateDisplay();
+      if (remaining <= 0) clearInterval(interval);
+    }, 1000);
+  }
+
+  if (action === 'stop') clearInterval(interval);
+
+  if (action === 'reset') {
+    clearInterval(interval);
+    remaining = 0;
+    updateDisplay();
+  }
+});
+
       </script>
       </div><!-- End container -->
 </body>
