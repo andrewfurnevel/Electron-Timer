@@ -7,7 +7,7 @@ let timerWindow;
 function createWindows() {
  controlWindow = new BrowserWindow({
   width: 1000,
-  height: 880,
+  height: 900,
   resizable: true,        // allow resize
   webPreferences: {
     preload: path.join(__dirname, 'preload.js'),
