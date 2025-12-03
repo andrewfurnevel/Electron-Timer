@@ -16,17 +16,29 @@ button, input {
   all: unset;
 }
 
-/* Variables */
-:root{
+/* CSS Variables */
 
-    --clr-bg-color: (color="#333");
-    --clr-primary-text: (color="#ccc");
+:root {
+
+/* Dark Mode */
+    --bg-color: #111;
+    --primary-text: #ccc;
+    --timer-row-color: #222;
+
+    --bg-color: #111;
+
+
+/*  Light Mode */
+
+/*  Timer Display */
+    /* --bg-color: fff;
+    --digit-color: #000; */
 }
 
 body {
     height: 100vh;
     color: #fff;
-    background-color: #111;
+    background-color: var(--bg-color);
 }
 
 /* Dashboard Styles */
@@ -49,7 +61,8 @@ body {
     height: 100px;
     margin-top: 20px;
     padding: 20px;
-    background-color: #222;
+    /* background-color: #222; */
+    background-color: var(--timer-row-color);
     border-radius: 10px;
 }
 
@@ -76,6 +89,7 @@ input[type="number"] {
   -moz-appearance: textfield; /* reset first */
 }
 
+/* Mozilla */
 input[type="number"]::-moz-inner-spin-button,
 input[type="number"]::-moz-outer-spin-button {
   opacity: 1;
